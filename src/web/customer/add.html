@@ -36,7 +36,20 @@
         document.getElementById('customer-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
-            fetch(config.apiUrl + '/add-customer', {
+
+            // データベースに登録せずに情報を add-confirm.html に渡す
+        const customerInfo = {};
+        formData.forEach((value, key) => {
+            customerInfo[key] = value;
+        });
+
+        // 遷移先に情報を渡しておく
+        localStorage.setItem('customerInfo', JSON.stringify(customerInfo));
+
+        // データベースには送信せずに確認画面に遷移
+        window.location.href = 'add-confirm.html';
+    });
+            /*fetch(config.apiUrl + '/add-customer', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -53,7 +66,7 @@
                 }
               })
               .catch(error => console.error('Error:', error));
-        });
+        });*/
     </script>
     <!-- BootstrapのJavaScriptの読み込み -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

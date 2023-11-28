@@ -10,10 +10,50 @@
 <body>
     <div class="container mt-5">
         <!-- ここにHTMLを書く -->
-    </div>
-    <script type="module">
+        <h2 class="mb-4">入力情報確認</h2>
+        <div>
+            <p><strong>会社名:</strong> <span id="companyName"></span></p>
+            <p><strong>業種:</strong> <span id="industry"></span></p>
+            <p><strong>連絡先:</strong> <span id="contact"></span></p>
+            <p><strong>所在地:</strong> <span id="location"></span></p>
+            <button type="button" class="btn btn-primary" id="confirmSubmit">送信</button>
+        </div>
+        
+        </div>
+
         <!-- ここにJSを書く -->
-    </script>
+
+        <script type="module">
+            // config.js をインポート
+        import config from '../config.js';
+
+            // ローカルストレージから情報を取得
+        const customerInfo = JSON.parse(localStorage.getItem('customerInfo'));
+
+            // 適切な要素に情報を表示
+            document.getElementById('companyName').textContent = customerInfo.companyName || '';
+            document.getElementById('industry').textContent = customerInfo.industry || '';
+            document.getElementById('contact').textContent = customerInfo.contact || '';
+            document.getElementById('location').textContent = customerInfo.location || '';
+    
+            document.getElementById('confirmSubmit').addEventListener('click', function() {
+           // データベースへの登録処理
+           fetch(config.apiUrl + '/add-customer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(customerInfo)
+                }).then(response => response.json())
+                  .then(data => {
+                    if (data.success) {
+                        alert('顧客情報が正常に保存されました。');
+                    } else {
+                        alert('保存に失敗しました。');
+                    }
+                }).catch(error => console.error('Error:', error));
+            });
+        </script>
     <!-- BootstrapのJavaScriptの読み込み -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
