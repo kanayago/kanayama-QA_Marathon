@@ -43,7 +43,7 @@
             customerInfo[key] = value;
         });
 
-        // 遷移先に情報を渡しておく
+        // 遷移先に情報を渡しておく（ローカルストレージに反映）
         localStorage.setItem('customerInfo', JSON.stringify(customerInfo));
 
         // データベースには送信せずに確認画面に遷移

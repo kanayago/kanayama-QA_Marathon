@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Detail</title>
+    <!-- Bootstrap CSSの読み込み -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="mb-4">Customer Detail</h1>
+      <div id="customer-detail">
+        <!-- 顧客の詳細情報はここに挿入されます -->
+      </div>
+      <button id="deleteBtn" class="btn btn-danger mt-3">削除</button>
+    </div>
+
+    <script type="module">
+      // ExpressサーバのAPIエンドポイントのURL
+      import config from "../config.js";
+
+      // URLからcustomer_idを取得
+      const urlParams = new URLSearchParams(window.location.search);
+      const customerId = urlParams.get('customer_id');
+
+      // データを取得して詳細情報を表示
+      const detailContainer = document.getElementById("customer-detail");
+
+      fetch(`${config.apiUrl}/customers/${customerId}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((customer) => {
+          const detailContainer = document.getElementById("customer-detail");
+
+          const detailHTML = `
+            <p><strong>Company Name:</strong> ${customer.company_name}</p>
+            <p><strong>Industry:</strong> ${customer.industry}</p>
+            <p><strong>Contact:</strong> ${customer.contact}</p>
+            <p><strong>Location:</strong> ${customer.location}</p>
+            <p><strong>Created Date:</strong> ${customer.created_date}</p>
+            <p><strong>Updated Date:</strong> ${customer.updated_date}</p>
+          `;
+
+          detailContainer.innerHTML = detailHTML;
+        })
+        .catch((error) => console.error(error));
+
+     // 削除ボタンのクリックイベントリスナー
+     const deleteBtn = document.getElementById("deleteBtn");
+      deleteBtn.addEventListener("click", () => {
+        // アラートダイアログを表示し、ユーザーが"OK"を選択したら削除処理を実行
+        const confirmDelete = window.confirm("削除していいですか？");
+        if (confirmDelete) {
+          // データベースからユーザーを削除する処理を実行
+          fetch(`${config.apiUrl}/customers/${customerId}`, {
+            method: 'DELETE',
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              alert("削除が完了しました");
+              // 削除が成功したらリダイレクトなどの処理を行うことができます
+              window.location.href = 'list.html'; // list.html にリダイレクト
+            })
+            .catch((error) => console.error(error));
+        }
+      });
+    </script>
+
+    <!-- BootstrapのJavaScriptと依存関係のリンク -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
