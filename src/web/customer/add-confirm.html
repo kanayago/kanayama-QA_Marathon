@@ -17,7 +17,9 @@
             <p><strong>業種:</strong> <span id="industry"></span></p>
             <p><strong>連絡先:</strong> <span id="contact"></span></p>
             <p><strong>所在地:</strong> <span id="location"></span></p>
+            <div class="text-right"></div>
             <button type="button" class="btn btn-primary" id="confirmSubmit">送信</button>
+        </div>
         </div>
         
         </div>
@@ -49,9 +51,11 @@
                   .then(data => {
                     if (data.success) {
                         alert('顧客情報が正常に保存されました。');
+                        window.location.href = 'list.html'; // list.html にリダイレクト
                     } else {
                         alert('保存に失敗しました。');
                     }
+                    
                 }).catch(error => console.error('Error:', error));
             });
         </script>
