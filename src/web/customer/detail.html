@@ -14,6 +14,8 @@
         <!-- 顧客の詳細情報はここに挿入されます -->
       </div>
       <button id="deleteBtn" class="btn btn-danger mt-3">削除</button>
+      <button id="updateBtn" class="btn btn-primary mt-3">編集はこちら</button><br>
+      <a href="http://localhost/customer/list.html">[顧客]一覧表示画面へ</a>
     </div>
 
     <script type="module">
@@ -71,6 +73,13 @@
             .catch((error) => console.error(error));
         }
       });
+
+              // 更新ボタンのクリックイベントリスナー
+        const updateBtn = document.getElementById("updateBtn");
+        updateBtn.addEventListener("click", () => {
+          // 更新ページに遷移
+          window.location.href = `update.html?customer_id=${customerId}`; // update.html にリダイレクト
+        });
     </script>
 
     <!-- BootstrapのJavaScriptと依存関係のリンク -->

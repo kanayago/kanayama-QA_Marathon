@@ -65,6 +65,27 @@ app.delete("/customers/:customerId", async (req, res) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.put("/customers/:customerId", async (req, res) => {
+  try {
+    const customerId = req.params.customerId;
+    const { companyName, industry, contact, location } = req.body;
+
+    const updateResult = await pool.query(
+      "UPDATE customers SET company_name = $1, industry = $2, contact = $3, location = $4, updated_date = CURRENT_TIMESTAMP WHERE customer_id = $5 RETURNING *",
+      [companyName, industry, contact, location, customerId]
+    );
+
+    if (updateResult.rows.length > 0) {
+      res.json({ success: true, updatedCustomer: updateResult.rows[0] });
+    } else {
+      res.status(404).json({ success: false, message: "Customer not found" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Error updating customer" });
+  }
+});
+
 app.post("/add-customer", async (req, res) => {
   try {
     const { companyName, industry, contact, location } = req.body;

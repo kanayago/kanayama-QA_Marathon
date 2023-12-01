@@ -9,10 +9,87 @@
 </head>
 <body>
     <div class="container mt-5">
-        <!-- ここにHTMLを書く -->
+        <h1 class="mb-4">情報更新</h1>
+        <form id="updateForm">
+            <div class="form-group">
+                <label for="companyName">Company Name:</label>
+                <input type="text" class="form-control" id="companyName" name="companyName" required>
+            </div>
+            <div class="form-group">
+                <label for="industry">Industry:</label>
+                <input type="text" class="form-control" id="industry" name="industry" required>
+            </div>
+            <div class="form-group">
+                <label for="contact">Contact:</label>
+                <input type="text" class="form-control" id="contact" name="contact" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <button type="submit" class="btn btn-primary">更新</button>
+        </form>
+        <a href="http://localhost/customer/list.html">[顧客]一覧表示画面へ</a>
     </div>
     <script type="module">
-        <!-- ここにJSを書く -->
+        // ExpressサーバのAPIエンドポイントのURL
+        import config from "../config.js";
+
+        // URLからcustomer_idを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        const customerId = urlParams.get('customer_id');
+
+        // フォーム要素を取得
+        const updateForm = document.getElementById("updateForm");
+
+        // データを取得してフォームに表示
+        fetch(`${config.apiUrl}/customers/${customerId}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((customer) => {
+                // 取得したデータをフォームにセット
+                document.getElementById("companyName").value = customer.company_name;
+                document.getElementById("industry").value = customer.industry;
+                document.getElementById("contact").value = customer.contact;
+                document.getElementById("location").value = customer.location;
+            })
+            .catch((error) => console.error(error));
+
+        // フォームの送信イベントリスナー
+        updateForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            // フォームデータを取得
+            const formData = new FormData(updateForm);
+
+            // フォームデータをオブジェクトに変換
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // データベースを更新する処理を実行
+            fetch(`${config.apiUrl}/customers/${customerId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    alert("更新が完了しました");
+                    // 更新が成功したらリダイレクトなどの処理を行うことができます
+                    window.location.href = 'list.html'; // list.html にリダイレクト
+                })
+                .catch((error) => console.error(error));
+        });
     </script>
     <!-- BootstrapのJavaScriptの読み込み -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
