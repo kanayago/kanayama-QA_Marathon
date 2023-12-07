@@ -1,5 +1,5 @@
 const config = {
-  apiUrl: 'http://localhost:3517'
+  apiUrl: '/api_goki_kanayama'
 };
 
 export default config;
