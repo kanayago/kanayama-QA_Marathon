@@ -18,6 +18,11 @@ describe('顧客情報入力フォームのテスト', () => {
 
     // フォームの送信
     cy.get('#customer-form').submit();
+    // 確認画面での送信
+    cy.wait(3000);
+    // ボタンをクリックする
+    cy.get('#confirmSubmit').click();
+
 
     cy.get('@alertStub').should('have.been.calledOnceWith', '顧客情報が正常に保存されました。');
 
