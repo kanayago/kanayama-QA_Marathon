@@ -20,37 +20,10 @@
             <div class="text-right"></div>
             <button type="button" class="btn btn-primary" id="confirmSubmit">送信</button>
         </div>
-
-        <div class="text-right">
-            <!-- ボタンを表示するコンテナ -->
-            <div id="buttonContainer"></div>
-        </div>
             <!--<a href="add.html">顧客情報入力へ</a><br>-->
         </div>
 
         <!-- ここにJSを書く -->
-
-        <script type="module">
-            // config.js をインポート
-            import config from '../config.js';
-    
-            // リンク先のURLを取得
-            const linkUrl = `/add.html`;
-    
-            // ボタンを生成
-            const button = document.createElement('button');
-            button.textContent = '情報入力画面へ';
-            button.className = 'btn btn-primary';
-    
-            // ボタンがクリックされたときのイベントリスナーを追加
-            button.addEventListener('click', function() {
-                // リンク先に遷移
-                window.location.href = linkUrl;
-            });
-    
-            document.getElementById('buttonContainer').appendChild(button);
-    
-        </script>
 
         <script type="module">
             // config.js をインポート
