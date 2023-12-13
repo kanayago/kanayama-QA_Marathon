@@ -10,7 +10,7 @@
   <body>
     <div class="container mt-5">
       <h1 class="mb-4">顧客一覧</h1>
-      <a href="../index.html">ホームへ</a><br>
+      <!--<a href="../index.html">ホームへ</a><br>-->
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
@@ -24,6 +24,20 @@
         </tbody>
       </table>
     </div>
+
+    <script type="module">
+      // config.js をインポート
+      import config from '../config.js';
+
+      // リンクを生成
+      const link = document.createElement('a');
+      link.href = `${config.apiUrl}/index.html`;
+      link.textContent = 'ホームへ';
+      //link.setAttribute('target', '_blank'); // 新しいタブで開く場合
+
+      // 生成したリンクを追加
+      document.body.appendChild(link);
+  </script>
 
     <script type="module">
       // ExpressサーバのAPIエンドポイントのURL

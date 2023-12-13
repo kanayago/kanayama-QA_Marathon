@@ -12,10 +12,33 @@
     <div class="container mt-5">
       <div class="container mt-5 bg-white p-4 rounded shadow"></div>
       <h1 class="mb-4">ホーム</h1>
-      <a href="/customer/list.html">[顧客]一覧表示画面へ</a><br>
-      <a href="/customer/add.html">[顧客]情報入力画面へ</a><br>
+      <!--<a href="/customer/list.html">[顧客]一覧表示画面へ</a><br>
+      <a href="/customer/add.html">[顧客]情報入力画面へ</a><br>-->
       
     </div>
+
+    <script type="module">
+      // config.js をインポート
+      import config from '../config.js';
+
+      // リンクを生成
+      const link = document.createElement('a');
+      link.href = `${config.apiUrl}/customer/list.html`;
+      link.textContent = '[顧客]一覧表示画面へ';
+      //link.setAttribute('target', '_blank'); // 新しいタブで開く場合
+
+      // 生成したリンクを追加
+      document.body.appendChild(link);
+
+      // リンクを生成
+      const link2 = document.createElement('a');
+      link2.href = `${config.apiUrl}/customer/add.html`;
+      link2.textContent = '[顧客]情報入力画面へ';
+      //link.setAttribute('target', '_blank'); // 新しいタブで開く場合
+
+      // 生成したリンクを追加
+      document.body.appendChild(link2);
+  </script>
 
     <!-- BootstrapのJavaScriptと依存関係のリンク -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
