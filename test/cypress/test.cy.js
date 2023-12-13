@@ -102,7 +102,7 @@ describe('情報編集と更新のテスト', () => {
     cy.get('#contact').clear().type(editedData.contact);
     cy.get('#location').clear().type(editedData.location);
 
-    // 更新ボタンを押下
+    // 更新ボタン押下
     cy.get('form').submit();
 
     // 更新完了のアラートが表示されるか確認

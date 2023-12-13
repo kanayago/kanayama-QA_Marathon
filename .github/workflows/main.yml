@@ -21,11 +21,11 @@ jobs:
     needs: test_staging
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Production
-        uses: actions/ssh-deploy@v2
+      - id: ssh-pro
+        uses: invi5H/ssh-action@v1
         with:
           host: ${{ secrets.PROD_SSH_HOST }}
           port: ${{ secrets.PROD_SSH_PORT }}
           username: ${{ secrets.PROD_SSH_USER }}
           key: ${{ secrets.PROD_SSH_KEY }}
-          script: 'bash /app/deploy.sh goki_kanayama'
+      - run: ssh ${{ steps.ssh-pro.outputs.SERVER }} bash /app/deploy.sh goki_kanayama
