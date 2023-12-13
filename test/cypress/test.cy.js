@@ -110,7 +110,7 @@ describe('情報編集と更新のテスト', () => {
     //   expect(text).to.equal('更新が完了しました');
     // });
 
-    // 会社名を押下して詳細ページに遷移
+    // 会社名を押下して詳細ページ遷移
     cy.wait(5000);
     cy.get('#customer-list a').last().click();
 
