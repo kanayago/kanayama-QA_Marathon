@@ -31,8 +31,23 @@
             <button type="submit" class="btn btn-primary">送信</button>
             </div>
         </form>
-        <a href="../index.html">ホームへ</a><br>
+        <!--<a href="../index.html">ホームへ</a><br>-->
     </div>
+
+    <script type="module">
+        // config.js をインポート
+        import config from '../config.js';
+
+        // リンクを生成
+        const link = document.createElement('a');
+        link.href = `${config.apiUrl}/index.html`;
+        link.textContent = 'ホームへ';
+        //link.setAttribute('target', '_blank'); // 新しいタブで開く場合
+
+        // 生成したリンクを追加
+        document.body.appendChild(link);
+    </script>
+
     <script type="module">
         import config from '../config.js';
 
