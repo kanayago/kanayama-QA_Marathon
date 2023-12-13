@@ -3,8 +3,9 @@ on:
   push:
     branches:
       - main
+
 jobs:
-  test:
+  test_staging:
     runs-on: ubuntu-latest
     steps:
       - id: ssh
@@ -14,4 +15,17 @@ jobs:
           SSH_PORT: ${{ secrets.DEV_SSH_PORT }}
           SSH_USER: ${{ secrets.DEV_SSH_USER }}
           SSH_KEY: ${{ secrets.DEV_SSHE_SSH_KEY }}
-      - run: ssh ${{ steps.ssh.outputs.SERVER }} bash /app/deploy_test.sh goki_kanayama
+      - run: ssh ${{ steps.ssh.outputs.SERVER }} bash /app/deploy.sh goki_kanayama
+
+  deploy_production:
+    needs: test_staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Production
+        uses: actions/ssh-deploy@v2
+        with:
+          host: ${{ secrets.PROD_SSH_HOST }}
+          port: ${{ secrets.PROD_SSH_PORT }}
+          username: ${{ secrets.PROD_SSH_USER }}
+          key: ${{ secrets.PROD_SSH_KEY }}
+          script: 'bash /app/deploy.sh goki_kanayama'
