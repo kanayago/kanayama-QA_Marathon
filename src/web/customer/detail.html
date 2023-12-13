@@ -21,20 +21,6 @@
     </div>
 
     <script type="module">
-      // config.js をインポート
-      import config from '../config.js';
-
-      // リンクを生成
-      const link = document.createElement('a');
-      link.href = `${config.apiUrl}/customer/list.html`;
-      link.textContent = '[顧客]一覧表示画面へ';
-      //link.setAttribute('target', '_blank'); // 新しいタブで開く場合
-
-      // 生成したリンクを追加
-      document.body.appendChild(link);
-  </script>
-
-    <script type="module">
       // ExpressサーバのAPIエンドポイントのURL
       import config from "../config.js";
 
