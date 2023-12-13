@@ -14,6 +14,9 @@
       <h1 class="mb-4">ホーム</h1>
       <!--<a href="/customer/list.html">[顧客]一覧表示画面へ</a><br>
       <a href="/customer/add.html">[顧客]情報入力画面へ</a><br>-->
+      <div class="text-right">
+        <div id="linkContainer1"></div>
+    </div>
       
     </div>
 
@@ -21,14 +24,11 @@
       // config.js をインポート
       import config from '../config.js';
 
-      // リンクを生成
-      const link = document.createElement('a');
-      link.href = `${config.apiUrl}/customer/list.html`;
-      link.textContent = '[顧客]一覧表示画面へ';
+      // リンク1を生成
+      const link1 = document.createElement('a');
+            link1.href = `${config.apiUrl}/customer/add.html`;
+            link1.textContent = '顧客情報一覧へ';
       //link.setAttribute('target', '_blank'); // 新しいタブで開く場合
-
-      // 生成したリンクを追加
-      document.body.appendChild(link);
 
   </script>
 
