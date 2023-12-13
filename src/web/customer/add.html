@@ -31,6 +31,11 @@
             <button type="submit" class="btn btn-primary">送信</button>
             </div>
         </form>
+        
+        <div class="text-right">
+            <!-- ボタンを表示するコンテナ -->
+            <div id="buttonContainer"></div>
+        </div>
         <!--<a href="../index.html">ホームへ</a><br>-->
     </div>
 
@@ -38,14 +43,22 @@
         // config.js をインポート
         import config from '../config.js';
 
-        // リンクを生成
-        const link = document.createElement('a');
-        link.href = `${config.apiUrl}/index.html`;
-        link.textContent = 'ホームへ';
-        //link.setAttribute('target', '_blank'); // 新しいタブで開く場合
+        // リンク先のURLを取得
+        const linkUrl = `${config.apiUrl}/customer/add.html`;
 
-        // 生成したリンクを追加
-        document.body.appendChild(link);
+        // ボタンを生成
+        const button = document.createElement('button');
+        button.textContent = '顧客情報入力へ';
+        button.className = 'btn btn-primary';
+
+        // ボタンがクリックされたときのイベントリスナーを追加
+        button.addEventListener('click', function() {
+            // リンク先に遷移
+            window.location.href = linkUrl;
+        });
+
+        document.getElementById('buttonContainer').appendChild(button);
+
     </script>
 
     <script type="module">
