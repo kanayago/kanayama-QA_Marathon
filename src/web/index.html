@@ -13,24 +13,43 @@
       <div class="container mt-5 bg-white p-4 rounded shadow"></div>
       <h1 class="mb-4">ホーム</h1>
       <!--<a href="/customer/list.html">[顧客]一覧表示画面へ</a><br>
-      <a href="/customer/add.html">[顧客]情報入力画面へ</a><br>-->
-      <div class="text-right">
-        <div id="linkContainer1">遷移</div>
-    </div>
-      
+      <a href="/customer/add.html">[顧客]情報入力画面へ</a><br>-->      
+    <div class="text-right">
+      <!-- ボタンを表示するコンテナ -->
+      <div id="buttonContainer"></div>
+  </div>
+
     </div>
 
     <script type="module">
       // config.js をインポート
       import config from '../config.js';
 
-      // リンク1を生成
-      const link1 = document.createElement('a');
-            link1.href = `${config.apiUrl}/customer/add.html`;
-            link1.textContent = '顧客情報一覧へ';
-      //link.setAttribute('target', '_blank'); // 新しいタブで開く場合
-      // 生成したリンクを追加
-      document.getElementById('linkContainer1').appendChild(link1);
+      // リンク先のURLを取得
+      const linkUrl = `./customer/add.html`;
+      const linkUrl2 = `./customer/list.html`;
+
+      // ボタンを生成
+      const button = document.createElement('button');
+      button.textContent = '[顧客]情報入力画面へ';
+      button.className = 'btn btn-primary';
+
+      const button = document.createElement('button');
+      button.textContent = '[顧客]一覧表示画面へ';
+      button.className = 'btn btn-primary';
+
+      // ボタンがクリックされたときのイベントリスナーを追加
+      button.addEventListener('click', function() {
+          // リンク先に遷移
+          window.location.href = linkUrl;
+      });
+
+      button.addEventListener('click', function() {
+          // リンク先に遷移
+          window.location.href = linkUrl2;
+      });
+
+      document.getElementById('buttonContainer').appendChild(button);
 
   </script>
 
