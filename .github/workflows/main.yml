@@ -28,4 +28,4 @@ jobs:
           SSH_PORT: ${{ secrets.PROD_SSH_PORT }}
           SSH_USER: ${{ secrets.PROD_SSH_USER }}
           SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
-      - run: ssh ${{ steps.ssh-pro.outputs.SERVER }} bash /app/deploy.sh goki_kanayama
+      - run: ssh ${{ steps.ssh-pro.outputs.SERVER }} bash /app/goki_kanayama/kanayama_deploy.sh goki_kanayama
