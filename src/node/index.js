@@ -20,6 +20,7 @@ app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
+//全件表示
 app.get("/customers", async (req, res) => {
   try {
     const customerData = await pool.query("SELECT * FROM customers");
@@ -30,6 +31,7 @@ app.get("/customers", async (req, res) => {
   }
 });
 
+//idで指定した顧客を表示
 app.get("/customers/:customerId", async (req, res) => {
   try {
     const customerId = req.params.customerId;
@@ -46,6 +48,7 @@ app.get("/customers/:customerId", async (req, res) => {
   }
 });
 
+//顧客削除
 app.delete("/customers/:customerId", async (req, res) => {
   try {
     const customerId = req.params.customerId;
@@ -65,6 +68,7 @@ app.delete("/customers/:customerId", async (req, res) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//顧客情報更新
 app.put("/customers/:customerId", async (req, res) => {
   try {
     const customerId = req.params.customerId;
@@ -86,6 +90,7 @@ app.put("/customers/:customerId", async (req, res) => {
   }
 });
 
+//顧客追加
 app.post("/add-customer", async (req, res) => {
   try {
     const { companyName, industry, contact, location } = req.body;
