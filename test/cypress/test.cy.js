@@ -112,7 +112,7 @@ describe('情報編集と更新のテスト', () => {
 
     // 会社名を押下して詳細ページ遷移
     cy.wait(5000);
-    cy.get('#customer-list a').last().click();
+    cy.get('#customer-list a').first().click();
 
     // 更新後のデータが表示されていることを確認
     cy.get('#customer-detail').contains(`会社名: ${editedData.companyName}`);
